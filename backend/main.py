@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import engine, Base
 from app.routes import auth, expenses
+import app.routes.ai as ai
 
 # Tables automatically create karo agar exist nahi karti
 Base.metadata.create_all(bind=engine)
@@ -26,6 +27,7 @@ app.add_middleware(
 # Routers register karo
 app.include_router(auth.router)
 app.include_router(expenses.router)
+app.include_router(ai.router)
 
 
 @app.get("/")
